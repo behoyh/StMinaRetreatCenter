@@ -125,15 +125,6 @@ namespace StMinaRetreat.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOff()
-        {
-            throw new NotImplementedException();
-        }
-
-        //
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]

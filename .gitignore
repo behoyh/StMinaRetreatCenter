@@ -3,3 +3,5 @@
 ################################################################################
 
 /src/StMinaRetreat/node_modules
+/src/StMinaRetreat/bin
+/src/StMinaRetreat/obj

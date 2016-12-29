@@ -4,6 +4,9 @@
 #menu-0 .navbar-brand {
   font-size: 20px;
 }
+#slider-1 H2 {
+  color: #ffffff;
+}
 #contacts2-3 UL {
   color: #f1c050;
 }
@@ -13,6 +16,9 @@
 #menu-4 .navbar-brand {
   font-size: 20px;
 }
+#msg-box5-f .lead P {
+  color: #000000;
+}
 #contacts2-5 UL {
   color: #f1c050;
 }
@@ -21,6 +27,14 @@
 }
 #menu-6 .navbar-brand {
   font-size: 20px;
+}
+#msg-box4-i .lead P {
+  font-size: 9px;
+  text-align: left;
+}
+#msg-box4-j .lead P {
+  font-size: 9px;
+  text-align: left;
 }
 #contacts2-8 UL {
   color: #f1c050;

@@ -13,6 +13,8 @@ using StMinaRetreat.Data;
 using StMinaRetreat.Models;
 using StMinaRetreat.Services;
 using System.IO;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace StMinaRetreat
 {
@@ -75,10 +77,19 @@ namespace StMinaRetreat
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.Use(async (context, next) =>
+            {
+                await next();
 
-            app.UseApplicationInsightsRequestTelemetry();
+                if (context.Response.StatusCode == 404
+                    && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
 
-            app.UseApplicationInsightsExceptionTelemetry();
+            app.UseStaticFiles();
 
             app.UseIdentity();
 

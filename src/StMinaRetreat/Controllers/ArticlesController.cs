@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+
 namespace StMinaRetreat.Controllers
 {
     [Produces("application/json")]
     [Route("api/Articles")]
     public class ArticlesController : Controller
     {
-        // GET: api/Articles
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetNewsletters()
         {
-            return new string[] { "value1", "value2" };
+            return Directory.GetDirectories("~/wwwroot/Newsletters");
         }
 
         // GET: api/Articles/5
@@ -28,6 +29,7 @@ namespace StMinaRetreat.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+
         }
         
         // PUT: api/Articles/5

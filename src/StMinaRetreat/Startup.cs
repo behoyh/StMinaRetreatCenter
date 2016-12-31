@@ -91,13 +91,9 @@ namespace StMinaRetreat
                 }
             });
 
-            app.UseApplicationInsightsExceptionTelemetry();
-
             app.UseStaticFiles();
 
             app.UseIdentity();
-
-            app.UseMvc();
         }
     }
 }

@@ -3,6 +3,9 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
+      "azure-mobile-services-client.TypeScript.DefinitelyTyped/1.7.1": {
+        "type": "package"
+      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -4397,6 +4400,16 @@
     }
   },
   "libraries": {
+    "azure-mobile-services-client.TypeScript.DefinitelyTyped/1.7.1": {
+      "sha512": "bt8J/c0gw3qmcHPgKb2JrSGDzj7DS8MbyqQNUwZ57j/2ggJKgobMbJY1jFGbY+GWUdC1YxL482kjgtGoPt0VMg==",
+      "type": "package",
+      "path": "azure-mobile-services-client.TypeScript.DefinitelyTyped/1.7.1",
+      "files": [
+        "Content/Scripts/typings/azure-mobile-services-client/index.d.ts",
+        "azure-mobile-services-client.TypeScript.DefinitelyTyped.1.7.1.nupkg.sha512",
+        "azure-mobile-services-client.TypeScript.DefinitelyTyped.nuspec"
+      ]
+    },
     "Libuv/1.9.0": {
       "sha512": "9Q7AaqtQhS8JDSIvRBt6ODSLWDBI4c8YxNxyCQemWebBFUtBbc6M5Vi5Gz1ZyIUlTW3rZK9bIr5gnVyv0z7a2Q==",
       "type": "package",
@@ -11094,7 +11107,8 @@
       "Microsoft.NETCore.App >= 1.0.1",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Tools >= 1.0.0-preview2-final",
-      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc >= 1.0.0-preview2-final"
+      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc >= 1.0.0-preview2-final",
+      "azure-mobile-services-client.TypeScript.DefinitelyTyped >= 1.7.1"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

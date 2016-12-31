@@ -40,7 +40,8 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }  },
+    },
+    "azure-mobile-services-client.TypeScript.DefinitelyTyped": "1.7.1"  },
 
   "tools": {
     "BundlerMinifier.Core": "2.0.238",

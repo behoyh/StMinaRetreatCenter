@@ -46,9 +46,6 @@ namespace StMinaRetreat
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -79,21 +76,13 @@ namespace StMinaRetreat
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.Use(async (context, next) =>
-            {
-                await next();
+            app.UseApplicationInsightsRequestTelemetry();
 
-                if (context.Response.StatusCode == 404
-                    && !Path.HasExtension(context.Request.Path.Value))
-                {
-                    context.Request.Path = "/index.html";
-                    await next();
-                }
-            });
-
-            app.UseStaticFiles();
+            app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseIdentity();
+
+            app.UseMvc();
         }
     }
 }

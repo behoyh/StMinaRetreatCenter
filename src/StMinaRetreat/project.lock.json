@@ -1798,6 +1798,9 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
+      "Microsoft.TypeScript.MSBuild/2.1.4": {
+        "type": "package"
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "type": "package",
         "dependencies": {
@@ -5849,6 +5852,58 @@
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.json"
+      ]
+    },
+    "Microsoft.TypeScript.MSBuild/2.1.4": {
+      "sha512": "yaafERI7EUSJkn3FGUphYJ3oO4JU7YablP3sxjRe433vpJQ+bnhk9WnEjVhA4+tsXUh9dgDqBGLO4iMG/4afPA==",
+      "type": "package",
+      "path": "Microsoft.TypeScript.MSBuild/2.1.4",
+      "files": [
+        "Microsoft.TypeScript.MSBuild.2.1.4.nupkg.sha512",
+        "Microsoft.TypeScript.MSBuild.nuspec",
+        "build/Microsoft.TypeScript.MSBuild.props",
+        "build/Microsoft.TypeScript.MSBuild.targets",
+        "tools/Microsoft.TypeScript.Default.props",
+        "tools/Microsoft.TypeScript.targets",
+        "tools/TypeScript.Tasks.dll",
+        "tools/tsc/chakracore.dll",
+        "tools/tsc/cs/diagnosticMessages.generated.json",
+        "tools/tsc/de/diagnosticMessages.generated.json",
+        "tools/tsc/en/diagnosticMessages.generated.json",
+        "tools/tsc/es/diagnosticMessages.generated.json",
+        "tools/tsc/fr/diagnosticMessages.generated.json",
+        "tools/tsc/it/diagnosticMessages.generated.json",
+        "tools/tsc/ja/diagnosticMessages.generated.json",
+        "tools/tsc/ko/diagnosticMessages.generated.json",
+        "tools/tsc/lib.d.ts",
+        "tools/tsc/lib.dom.d.ts",
+        "tools/tsc/lib.dom.iterable.d.ts",
+        "tools/tsc/lib.es2015.collection.d.ts",
+        "tools/tsc/lib.es2015.core.d.ts",
+        "tools/tsc/lib.es2015.d.ts",
+        "tools/tsc/lib.es2015.generator.d.ts",
+        "tools/tsc/lib.es2015.iterable.d.ts",
+        "tools/tsc/lib.es2015.promise.d.ts",
+        "tools/tsc/lib.es2015.proxy.d.ts",
+        "tools/tsc/lib.es2015.reflect.d.ts",
+        "tools/tsc/lib.es2015.symbol.d.ts",
+        "tools/tsc/lib.es2015.symbol.wellknown.d.ts",
+        "tools/tsc/lib.es2016.array.include.d.ts",
+        "tools/tsc/lib.es2016.d.ts",
+        "tools/tsc/lib.es2017.d.ts",
+        "tools/tsc/lib.es2017.object.d.ts",
+        "tools/tsc/lib.es5.d.ts",
+        "tools/tsc/lib.es6.d.ts",
+        "tools/tsc/lib.scripthost.d.ts",
+        "tools/tsc/lib.webworker.d.ts",
+        "tools/tsc/pl/diagnosticMessages.generated.json",
+        "tools/tsc/pt-BR/diagnosticMessages.generated.json",
+        "tools/tsc/ru/diagnosticMessages.generated.json",
+        "tools/tsc/tr/diagnosticMessages.generated.json",
+        "tools/tsc/tsc.exe",
+        "tools/tsc/tsc.js",
+        "tools/tsc/zh-CN/diagnosticMessages.generated.json",
+        "tools/tsc/zh-TW/diagnosticMessages.generated.json"
       ]
     },
     "Microsoft.VisualBasic/10.0.1": {
@@ -11105,6 +11160,7 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.1",
+      "Microsoft.TypeScript.MSBuild >= 2.1.4",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Tools >= 1.0.0-preview2-final",
       "Microsoft.VisualStudio.Web.CodeGenerators.Mvc >= 1.0.0-preview2-final",

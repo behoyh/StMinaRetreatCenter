@@ -1,0 +1,8 @@
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\bin\Release\StMinaRetreatTest.dll
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\bin\Release\StMinaRetreatTest.pdb
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\bin\Release\RestSharp.dll
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\bin\Release\RestSharp.xml
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\obj\Release\StMinaRetreatTest.csprojResolveAssemblyReference.cache
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\obj\Release\StMinaRetreatTest.dll
+C:\Users\besho\Documents\GitHub\StMinaRetreatCenter\StMinaRetreatTest\obj\Release\StMinaRetreatTest.pdb

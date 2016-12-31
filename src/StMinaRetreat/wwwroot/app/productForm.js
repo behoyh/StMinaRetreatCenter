@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var Product_1 = require('./Product');
-var product_service_1 = require('./product.service');
+var core_1 = require("@angular/core");
+var Product_1 = require("./Product");
+var product_service_1 = require("./product.service");
 var ProductForm = (function () {
     function ProductForm(_service) {
         this._service = _service;
@@ -31,15 +31,15 @@ var ProductForm = (function () {
         enumerable: true,
         configurable: true
     });
-    ProductForm = __decorate([
-        core_1.Component({
-            moduleId: __filename,
-            selector: 'pform',
-            templateUrl: './app/productForm.component.html'
-        }), 
-        __metadata('design:paramtypes', [product_service_1.ProductService])
-    ], ProductForm);
     return ProductForm;
 }());
+ProductForm = __decorate([
+    core_1.Component({
+        moduleId: __filename,
+        selector: 'pform',
+        templateUrl: './app/productForm.component.html'
+    }),
+    __metadata("design:paramtypes", [product_service_1.ProductService])
+], ProductForm);
 exports.ProductForm = ProductForm;
 //# sourceMappingURL=productForm.js.map

@@ -1,4 +1,5 @@
-﻿import {
+﻿/// <reference path="newsletterservice.ts" />
+import {
     AfterContentChecked,
     AfterContentInit,
     AfterViewChecked,
@@ -10,11 +11,12 @@
     SimpleChanges,
     Component
 } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { Injectable, ReflectiveInjector } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
+import { Headers, RequestOptions, ConnectionBackend } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { NewsletterService } from './NewsletterService'
 
 export class FilePath {
     path: string;
@@ -89,7 +91,9 @@ var PATHS: FilePath[] = [
     }
   `]
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
+
     title = 'Directory';
     selectedPath: FilePath;
 
@@ -97,54 +101,47 @@ export class AppComponent {
 
     onSelect(path: FilePath): void {
         this.selectedPath = path;
-    }
-}
 
-export class HeroListComponent implements OnInit {
+    }
+
+
     errorMessage: string;
-    paths: FilePath[];
+
     mode = 'Observable';
 
-    constructor(private heroService: NewsletterService) { }
+    constructor(private newsletterService: NewsletterService)
+    {
+
+    }
 
     ngOnInit() { this.getNewsletterDirectories(); }
 
     getNewsletterDirectories() {
-        this.heroService.getNewsletterDirectories()
+        this.newsletterService.getNewsletterDirectories()
             .subscribe(
-            path => this.paths = PATHS,
+            path => this.paths = path,
             error => this.errorMessage = <any>error);
     }
 
+    getNewsletters(path: FilePath) {
+        this.newsletterService.getNewsletters(path.path)
+            .subscribe(
+            path => this.paths = path,
+            error => this.errorMessage = <any>error);
+    }
+
+    getNewsletter(path: FilePath) {
+        this.newsletterService.getNewsLetter(path.path)
+            .subscribe(data => this.downloadFile(data.blob),
+            error => this.errorMessage = <any>error);
+
+    }
+
+    downloadFile(data: () => Blob) {
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var url = window.URL.createObjectURL(blob);
+        window.open(url);
+    }
+
 }
 
-@Injectable()
-export class NewsletterService {
-    private dUrl = 'api/Newsletters';  // URL to web API
-
-    constructor(private http: Http) { }
-
-    getNewsletterDirectories(): Observable<FilePath[]> {
-        return this.http.get(this.dUrl)
-            .map((r: Response) => r.json() as FilePath)
-            .catch(this.handleError);
-    }
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.data || {};
-    }
-
-    private handleError(error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable.throw(errMsg);
-    }
-}

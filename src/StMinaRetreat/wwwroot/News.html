@@ -15,8 +15,17 @@
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
 
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
-    <script src="app/app.componentHW.js"></script>
+    <script>
+        System.import('app').catch(function (err) { console.error(err); });
+    </script>
 
 
 
@@ -42,7 +51,9 @@
             <h3 class="mbr-section-title display-2">Newsletters</h3>
         </div>
         <div>
-            <my-hw></my-hw>
+            <div class="container">
+                <my-app>Loading...</my-app>
+            </div>
         </div>
     </section>
 

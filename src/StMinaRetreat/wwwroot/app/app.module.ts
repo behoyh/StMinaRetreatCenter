@@ -1,19 +1,13 @@
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HwComponent }   from './app.componentHW';
-import { ProductService } from './product.service';
-import {ProductForm } from './productForm';
- 
+import { AppComponent } from './app.component';
+
+
+
+
 @NgModule({
-  imports:      [ BrowserModule,
-                  FormsModule,
-                  HttpModule],
-  declarations: [ HwComponent, ProductForm],
-  providers: [
-        ProductService
-  ],
-  bootstrap:    [  HwComponent, ProductForm]
+    imports: [BrowserModule],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

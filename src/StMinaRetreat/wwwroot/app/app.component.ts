@@ -22,9 +22,7 @@ export class FilePath {
     path: string;
 }
 
-var PATHS: FilePath[] = [
-    { path: 'Sample Path' }
-];
+var PATHS: FilePath[] = [];
 
 @Component({
     selector: 'my-app',
@@ -32,63 +30,12 @@ var PATHS: FilePath[] = [
     <div *ngIf="selectedPath">
       <h2>{{selectedPath.path}}</h2>
     </div>
-    <ul class="heroes">
-      <li *ngFor="let path of paths"
-        [class.selected]="path === selectedPath"
-        (click)="onSelect(path)">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let path of paths" class="list-group-item" (click)="onSelect(path)">
         <span class="badge">{{path.path}}</span>
       </li>
     </ul>
-  `,
-    styles: [`
-    .selected {
-      background-color: #CFD8DC !important;
-      color: white;
-    }
-    .heroes {
-      margin: 0 0 2em 0;
-      list-style-type: none;
-      padding: 0;
-      width: 15em;
-    }
-    .heroes li {
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      background-color: #EEE;
-      margin: .5em;
-      padding: .3em 0;
-      height: 1.6em;
-      border-radius: 4px;
-    }
-    .heroes li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
-    }
-    .heroes li:hover {
-      color: #607D8B;
-      background-color: #DDD;
-      left: .1em;
-    }
-    .heroes .text {
-      position: relative;
-      top: -3px;
-    }
-    .heroes .badge {
-      display: inline-block;
-      font-size: small;
-      color: white;
-      padding: 0.8em 0.7em 0 0.7em;
-      background-color: #607D8B;
-      line-height: 1em;
-      position: relative;
-      left: -1px;
-      top: -4px;
-      height: 1.8em;
-      margin-right: .8em;
-      border-radius: 4px 0 0 4px;
-    }
-  `]
+  `
 })
 
 export class AppComponent implements OnInit {
@@ -122,24 +69,43 @@ export class AppComponent implements OnInit {
 
     getNewsletter(path: FilePath) {
         this.newsletterService.getNewsLetter(path.path)
-            .subscribe(data => this.downloadFile(data.blob),
+            .subscribe(data => this.downloadFile(data),
             error => this.errorMessage = <any>error);
 
     }
 
-    downloadFile(data: () => Blob) {
+    downloadFile(data: Blob) {
         var blob = new Blob([data], { type: 'application/pdf' });
         var url = window.URL.createObjectURL(blob);
-        window.open(url);
+        window.open(url, "_blank");
+
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, "Newsletter.pdf");
+
+        } else {
+            var blob = new Blob([data], { type: 'application/pdf' });
+            var url = window.URL.createObjectURL(blob);
+            window.open(url, "_blank");
+        }
+
     }
 
     onSelect(path: FilePath): void {
+        var trunPath = new FilePath();
+
+
         this.selectedPath = path;
-        debugger;
 
-        path.path = path.path.replace('wwwroot/', '');
+        var firstLevel = path.path.indexOf('wwwroot/Newsletters\\') !== -1;
 
-        this.getNewsletters(path);
+        if (firstLevel) {
+            trunPath.path = path.path.split('\\').pop();
+            this.getNewsletters(trunPath);
+        }
+        else {
+            trunPath.path = path.path.replace('wwwroot/Newsletters/', '').replace('\\', '/');
+            this.getNewsletter(trunPath);
+        }
     }
 
 

@@ -12,10 +12,10 @@
 } from '@angular/core';
 import { Injectable, ReflectiveInjector } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions, ConnectionBackend } from '@angular/http';
+import { Headers, RequestOptions, ResponseContentType, ConnectionBackend } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import { AppComponent, FilePath } from './app.component';
+import { AppComponent, FilePath} from './app.component';
 
 @Injectable()
 export class NewsletterService {
@@ -29,19 +29,20 @@ export class NewsletterService {
     }
 
     getNewsletters(path: string): Observable<FilePath[]> {
-        return this.http.get('api/'+path)
+        return this.http.get('api/Newsletters/' + path)
             .map((r: Response) => r.json() as FilePath)
             .catch(this.handleError);
     }
 
     getNewsLetter(path: string) {
-        return this.http.get(path);
-    }
+        var options = new RequestOptions({
+            headers: new Headers({ 'Content-Type': 'application/pdf' }),
+            responseType : ResponseContentType.Blob
+        });
 
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.data || {};
+        return this.http.get('api/Newsletters/' + path, options)
+            .map((response: Response) => response.blob())
+            .catch(this.handleError);
     }
 
     private handleError(error: Response | any) {

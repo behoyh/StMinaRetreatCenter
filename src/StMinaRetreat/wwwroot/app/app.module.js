@@ -17,6 +17,7 @@ var NewsletterService_1 = require("./NewsletterService");
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule.prototype.ngOnInit = function () { core_1.enableProdMode(); };
     return AppModule;
 }());
 AppModule = __decorate([

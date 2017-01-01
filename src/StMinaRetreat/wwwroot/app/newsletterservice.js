@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var http_2 = require("@angular/http");
 var Rx_1 = require("rxjs/Rx");
 require("rxjs/add/operator/map");
 var NewsletterService = (function () {
@@ -22,16 +23,18 @@ var NewsletterService = (function () {
             .catch(this.handleError);
     };
     NewsletterService.prototype.getNewsletters = function (path) {
-        return this.http.get('api/' + path)
+        return this.http.get('api/Newsletters/' + path)
             .map(function (r) { return r.json(); })
             .catch(this.handleError);
     };
     NewsletterService.prototype.getNewsLetter = function (path) {
-        return this.http.get(path);
-    };
-    NewsletterService.prototype.extractData = function (res) {
-        var body = res.json();
-        return body.data || {};
+        var options = new http_2.RequestOptions({
+            headers: new http_2.Headers({ 'Content-Type': 'application/pdf' }),
+            responseType: http_2.ResponseContentType.Blob
+        });
+        return this.http.get('api/Newsletters/' + path, options)
+            .map(function (response) { return response.blob(); })
+            .catch(this.handleError);
     };
     NewsletterService.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure

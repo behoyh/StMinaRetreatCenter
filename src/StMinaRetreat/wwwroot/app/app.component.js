@@ -18,9 +18,7 @@ var FilePath = (function () {
     return FilePath;
 }());
 exports.FilePath = FilePath;
-var PATHS = [
-    { path: 'Sample Path' }
-];
+var PATHS = [];
 var AppComponent = (function () {
     function AppComponent(newsletterService) {
         this.newsletterService = newsletterService;
@@ -42,26 +40,40 @@ var AppComponent = (function () {
     AppComponent.prototype.getNewsletter = function (path) {
         var _this = this;
         this.newsletterService.getNewsLetter(path.path)
-            .subscribe(function (data) { return _this.downloadFile(data.blob); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (data) { return _this.downloadFile(data); }, function (error) { return _this.errorMessage = error; });
     };
     AppComponent.prototype.downloadFile = function (data) {
         var blob = new Blob([data], { type: 'application/pdf' });
         var url = window.URL.createObjectURL(blob);
-        window.open(url);
+        window.open(url, "_blank");
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, "Newsletter.pdf");
+        }
+        else {
+            var blob = new Blob([data], { type: 'application/pdf' });
+            var url = window.URL.createObjectURL(blob);
+            window.open(url, "_blank");
+        }
     };
     AppComponent.prototype.onSelect = function (path) {
+        var trunPath = new FilePath();
         this.selectedPath = path;
-        debugger;
-        path.path = path.path.replace('wwwroot/', '');
-        this.getNewsletters(path);
+        var firstLevel = path.path.indexOf('wwwroot/Newsletters\\') !== -1;
+        if (firstLevel) {
+            trunPath.path = path.path.split('\\').pop();
+            this.getNewsletters(trunPath);
+        }
+        else {
+            trunPath.path = path.path.replace('wwwroot/Newsletters/', '').replace('\\', '/');
+            this.getNewsletter(trunPath);
+        }
     };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n    <div *ngIf=\"selectedPath\">\n      <h2>{{selectedPath.path}}</h2>\n    </div>\n    <ul class=\"heroes\">\n      <li *ngFor=\"let path of paths\"\n        [class.selected]=\"path === selectedPath\"\n        (click)=\"onSelect(path)\">\n        <span class=\"badge\">{{path.path}}</span>\n      </li>\n    </ul>\n  ",
-        styles: ["\n    .selected {\n      background-color: #CFD8DC !important;\n      color: white;\n    }\n    .heroes {\n      margin: 0 0 2em 0;\n      list-style-type: none;\n      padding: 0;\n      width: 15em;\n    }\n    .heroes li {\n      cursor: pointer;\n      position: relative;\n      left: 0;\n      background-color: #EEE;\n      margin: .5em;\n      padding: .3em 0;\n      height: 1.6em;\n      border-radius: 4px;\n    }\n    .heroes li.selected:hover {\n      background-color: #BBD8DC !important;\n      color: white;\n    }\n    .heroes li:hover {\n      color: #607D8B;\n      background-color: #DDD;\n      left: .1em;\n    }\n    .heroes .text {\n      position: relative;\n      top: -3px;\n    }\n    .heroes .badge {\n      display: inline-block;\n      font-size: small;\n      color: white;\n      padding: 0.8em 0.7em 0 0.7em;\n      background-color: #607D8B;\n      line-height: 1em;\n      position: relative;\n      left: -1px;\n      top: -4px;\n      height: 1.8em;\n      margin-right: .8em;\n      border-radius: 4px 0 0 4px;\n    }\n  "]
+        template: "\n    <div *ngIf=\"selectedPath\">\n      <h2>{{selectedPath.path}}</h2>\n    </div>\n    <ul class=\"list-group list-group-flush\">\n      <li *ngFor=\"let path of paths\" class=\"list-group-item\" (click)=\"onSelect(path)\">\n        <span class=\"badge\">{{path.path}}</span>\n      </li>\n    </ul>\n  "
     }),
     __metadata("design:paramtypes", [NewsletterService_1.NewsletterService])
 ], AppComponent);

@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -13,4 +13,8 @@ import { NewsletterService } from './NewsletterService'
     bootstrap: [AppComponent],
     providers: [NewsletterService]
 })
-export class AppModule { }
+export class AppModule {
+
+    ngOnInit() { enableProdMode(); }
+
+}

@@ -28,7 +28,7 @@ namespace StMinaRetreat.Controllers
         {
             List<NewsletterPath> paths = new List<NewsletterPath>();
 
-            foreach (var path in Directory.GetFiles($"wwwroot/{volume}"))
+            foreach (var path in Directory.GetFiles($"wwwroot/Newsletters/{volume}"))
             {
                 paths.Add(new NewsletterPath { path = path });
             }
@@ -39,11 +39,14 @@ namespace StMinaRetreat.Controllers
         [HttpGet("{volume}/{quarter}")]
         public FileContentResult GetNewsletter(string volume, string quarter)
         {
+
             HttpContext.Response.ContentType = "application/pdf";
             FileContentResult result = new FileContentResult(System.IO.File.ReadAllBytes($"wwwroot/Newsletters/{volume}/{quarter}"), "application/pdf")
             {
-                FileDownloadName = "test.pdf"
+                FileDownloadName = $"{quarter}.pdf"
             };
+
+
 
             return result;
         }

@@ -42,8 +42,7 @@
       "type": "build"
     },
     "azure-mobile-services-client.TypeScript.DefinitelyTyped": "1.7.1",
-    "Microsoft.TypeScript.MSBuild": "2.1.4",
-    "SimpleJson": "0.38.0"  },
+    "Microsoft.TypeScript.MSBuild": "2.1.4"},
 
   "tools": {
     "BundlerMinifier.Core": "2.0.238",

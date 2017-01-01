@@ -22,7 +22,7 @@ var NewsletterService = (function () {
             .catch(this.handleError);
     };
     NewsletterService.prototype.getNewsletters = function (path) {
-        return this.http.get(path)
+        return this.http.get('api/' + path)
             .map(function (r) { return r.json(); })
             .catch(this.handleError);
     };

@@ -29,6 +29,9 @@ var PATHS: FilePath[] = [
 @Component({
     selector: 'my-app',
     template: `
+    <div *ngIf="selectedPath">
+      <h2>{{selectedPath.path}}</h2>
+    </div>
     <ul class="heroes">
       <li *ngFor="let path of paths"
         [class.selected]="path === selectedPath"
@@ -36,10 +39,6 @@ var PATHS: FilePath[] = [
         <span class="badge">{{path.path}}</span>
       </li>
     </ul>
-    <div *ngIf="selectedPath">
-      <h2>{{selectedPath.path}}</h2>
-      <div><label>file: </label>{{selectedPath.path}}</div>
-    </div>
   `,
     styles: [`
     .selected {
@@ -99,20 +98,11 @@ export class AppComponent implements OnInit {
 
     paths = PATHS;
 
-    onSelect(path: FilePath): void {
-        this.selectedPath = path;
-
-    }
-
-
     errorMessage: string;
 
     mode = 'Observable';
 
-    constructor(private newsletterService: NewsletterService)
-    {
-
-    }
+    constructor(private newsletterService: NewsletterService) { }
 
     ngOnInit() { this.getNewsletterDirectories(); }
 
@@ -142,6 +132,16 @@ export class AppComponent implements OnInit {
         var url = window.URL.createObjectURL(blob);
         window.open(url);
     }
+
+    onSelect(path: FilePath): void {
+        this.selectedPath = path;
+        debugger;
+
+        path.path = path.path.replace('wwwroot/', '');
+
+        this.getNewsletters(path);
+    }
+
 
 }
 

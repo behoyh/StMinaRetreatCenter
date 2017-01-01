@@ -29,7 +29,7 @@ export class NewsletterService {
     }
 
     getNewsletters(path: string): Observable<FilePath[]> {
-        return this.http.get(path)
+        return this.http.get('api/'+path)
             .map((r: Response) => r.json() as FilePath)
             .catch(this.handleError);
     }

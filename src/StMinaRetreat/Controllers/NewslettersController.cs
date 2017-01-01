@@ -11,15 +11,29 @@ namespace StMinaRetreat.Controllers
     public class NewslettersController : Controller
     {
         [HttpGet()]
-        public IEnumerable<string> GetNewsletterDirectories()
+        public IEnumerable<NewsletterPath> GetNewsletterDirectories()
         {
-            return Directory.GetDirectories("wwwroot/Newsletters");
+            List<NewsletterPath> paths = new List<NewsletterPath>();
+
+            foreach (var path in Directory.GetDirectories("wwwroot/Newsletters"))
+            {
+                paths.Add(new NewsletterPath { path = path });
+            }
+
+            return paths;
         }
 
         [HttpGet("{volume}")]
-        public IEnumerable<string> GetNewletters(string volume)
+        public IEnumerable<NewsletterPath> GetNewletters(string volume)
         {
-            return Directory.GetFiles($"wwwroot/Newsletters/{volume}");
+            List<NewsletterPath> paths = new List<NewsletterPath>();
+
+            foreach (var path in Directory.GetFiles($"wwwroot/{volume}"))
+            {
+                paths.Add(new NewsletterPath { path = path });
+            }
+
+            return paths;
         }
 
         [HttpGet("{volume}/{quarter}")]
@@ -41,17 +55,22 @@ namespace StMinaRetreat.Controllers
         {
 
         }
-        
+
         // PUT: api/Articles/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
+    }
+
+    public class NewsletterPath
+    {
+        public string path { get; set; }
     }
 }

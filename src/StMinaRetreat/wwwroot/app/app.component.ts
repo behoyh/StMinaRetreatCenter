@@ -32,7 +32,7 @@ var PATHS: FilePath[] = [];
     </div>
     <ul class="list-group list-group-flush">
       <li *ngFor="let path of paths" class="list-group-item" (click)="onSelect(path)">
-        <span class="badge">{{path.path}}</span>
+        <a id={{path.path}} download="Newsletter.pdf" class="badge">{{path.path}}</a>
       </li>
     </ul>
   `
@@ -67,27 +67,21 @@ export class AppComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
-    getNewsletter(path: FilePath) {
+    getNewsletter(path: FilePath, id:string) {
         this.newsletterService.getNewsLetter(path.path)
-            .subscribe(data => this.downloadFile(data),
+            .subscribe(data => this.downloadFile(data, id),
             error => this.errorMessage = <any>error);
 
     }
 
-    downloadFile(data: Blob) {
+    downloadFile(data: Blob, id: string) {
         var blob = new Blob([data], { type: 'application/pdf' });
+        var a = document.createElement("a");
         var url = window.URL.createObjectURL(blob);
-        window.open(url, "_blank");
-
-        if (window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(blob, "Newsletter.pdf");
-
-        } else {
-            var blob = new Blob([data], { type: 'application/pdf' });
-            var url = window.URL.createObjectURL(blob);
-            window.open(url, "_blank");
-        }
-
+        document.getElementById(id);
+        a.href = url;
+        a.click();
+        window.URL.revokeObjectURL(url);
     }
 
     onSelect(path: FilePath): void {
@@ -104,7 +98,7 @@ export class AppComponent implements OnInit {
         }
         else {
             trunPath.path = path.path.replace('wwwroot/Newsletters/', '').replace('\\', '/');
-            this.getNewsletter(trunPath);
+            this.getNewsletter(trunPath, path.path);
         }
     }
 

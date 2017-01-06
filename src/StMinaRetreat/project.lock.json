@@ -11164,6 +11164,7 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Tools >= 1.0.0-preview2-final",
       "Microsoft.VisualStudio.Web.CodeGenerators.Mvc >= 1.0.0-preview2-final",
+      "Newtonsoft.Json >= 9.0.1",
       "azure-mobile-services-client.TypeScript.DefinitelyTyped >= 1.7.1"
     ],
     ".NETCoreApp,Version=v1.0": []

@@ -37,23 +37,19 @@ var AppComponent = (function () {
         this.newsletterService.getNewsletters(path.path)
             .subscribe(function (path) { return _this.paths = path; }, function (error) { return _this.errorMessage = error; });
     };
-    AppComponent.prototype.getNewsletter = function (path) {
+    AppComponent.prototype.getNewsletter = function (path, id) {
         var _this = this;
         this.newsletterService.getNewsLetter(path.path)
-            .subscribe(function (data) { return _this.downloadFile(data); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (data) { return _this.downloadFile(data, id); }, function (error) { return _this.errorMessage = error; });
     };
-    AppComponent.prototype.downloadFile = function (data) {
+    AppComponent.prototype.downloadFile = function (data, id) {
         var blob = new Blob([data], { type: 'application/pdf' });
+        var a = document.createElement("a");
         var url = window.URL.createObjectURL(blob);
-        window.open(url, "_blank");
-        if (window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(blob, "Newsletter.pdf");
-        }
-        else {
-            var blob = new Blob([data], { type: 'application/pdf' });
-            var url = window.URL.createObjectURL(blob);
-            window.open(url, "_blank");
-        }
+        document.getElementById(id);
+        a.href = url;
+        a.click();
+        window.URL.revokeObjectURL(url);
     };
     AppComponent.prototype.onSelect = function (path) {
         var trunPath = new FilePath();
@@ -65,7 +61,7 @@ var AppComponent = (function () {
         }
         else {
             trunPath.path = path.path.replace('wwwroot/Newsletters/', '').replace('\\', '/');
-            this.getNewsletter(trunPath);
+            this.getNewsletter(trunPath, path.path);
         }
     };
     return AppComponent;
@@ -73,7 +69,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n    <div *ngIf=\"selectedPath\">\n      <h2>{{selectedPath.path}}</h2>\n    </div>\n    <ul class=\"list-group list-group-flush\">\n      <li *ngFor=\"let path of paths\" class=\"list-group-item\" (click)=\"onSelect(path)\">\n        <span class=\"badge\">{{path.path}}</span>\n      </li>\n    </ul>\n  "
+        template: "\n    <div *ngIf=\"selectedPath\">\n      <h2>{{selectedPath.path}}</h2>\n    </div>\n    <ul class=\"list-group list-group-flush\">\n      <li *ngFor=\"let path of paths\" class=\"list-group-item\" (click)=\"onSelect(path)\">\n        <a id={{path.path}} download=\"Newsletter.pdf\" class=\"badge\">{{path.path}}</a>\n      </li>\n    </ul>\n  "
     }),
     __metadata("design:paramtypes", [NewsletterService_1.NewsletterService])
 ], AppComponent);

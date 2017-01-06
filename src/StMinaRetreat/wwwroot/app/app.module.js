@@ -14,6 +14,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
 var NewsletterService_1 = require("./NewsletterService");
+var app_view_news_component_1 = require("./app.view.news.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,8 +24,8 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
-        declarations: [app_component_1.AppComponent],
-        bootstrap: [app_component_1.AppComponent],
+        declarations: [app_component_1.AppComponent, app_view_news_component_1.ViewNewsComponent],
+        bootstrap: [app_component_1.AppComponent, app_view_news_component_1.ViewNewsComponent],
         providers: [NewsletterService_1.NewsletterService]
     }),
     __metadata("design:paramtypes", [])

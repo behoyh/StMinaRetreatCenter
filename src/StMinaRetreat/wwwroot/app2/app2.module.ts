@@ -2,17 +2,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { AppComponent } from './app.component';
-import { NewsletterService } from './NewsletterService';
-import { ViewNewsComponent } from './app.view.news.component';
+import { WriteNewsComponent } from './app.write.news.component';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule],
-    declarations: [AppComponent, ViewNewsComponent],
-    bootstrap: [AppComponent, ViewNewsComponent],
-    providers: [NewsletterService]
+    declarations: [WriteNewsComponent],
+    bootstrap: [WriteNewsComponent]
 })
-export class AppModule {
+export class App2Module {
 
     ngOnInit() { enableProdMode(); }
 

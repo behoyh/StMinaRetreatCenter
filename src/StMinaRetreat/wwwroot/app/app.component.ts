@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
-    getNewsletter(path: FilePath, id:string) {
+    getNewsletter(path: FilePath, id: string) {
         this.newsletterService.getNewsLetter(path.path)
             .subscribe(data => this.downloadFile(data, id),
             error => this.errorMessage = <any>error);
@@ -76,12 +76,14 @@ export class AppComponent implements OnInit {
 
     downloadFile(data: Blob, id: string) {
         var blob = new Blob([data], { type: 'application/pdf' });
-        var a = document.createElement("a");
         var url = window.URL.createObjectURL(blob);
-        document.getElementById(id);
-        a.href = url;
-        a.click();
-        window.URL.revokeObjectURL(url);
+
+        if (window.navigator.msSaveBlob) {
+            window.navigator.msSaveBlob(blob, 'Newsletter.pdf');
+        }
+        else {
+            window.open(url, "_blank");
+        }
     }
 
     onSelect(path: FilePath): void {

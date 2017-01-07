@@ -44,12 +44,13 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.downloadFile = function (data, id) {
         var blob = new Blob([data], { type: 'application/pdf' });
-        var a = document.createElement("a");
         var url = window.URL.createObjectURL(blob);
-        document.getElementById(id);
-        a.href = url;
-        a.click();
-        window.URL.revokeObjectURL(url);
+        if (window.navigator.msSaveBlob) {
+            window.navigator.msSaveBlob(blob, 'Newsletter.pdf');
+        }
+        else {
+            window.open(url, "_blank");
+        }
     };
     AppComponent.prototype.onSelect = function (path) {
         var trunPath = new FilePath();

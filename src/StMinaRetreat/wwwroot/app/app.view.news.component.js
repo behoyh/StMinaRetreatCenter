@@ -28,7 +28,7 @@ var ViewNewsComponent = (function () {
     ViewNewsComponent.prototype.ngOnInit = function () { this.getNews(); };
     ViewNewsComponent.prototype.getNews = function () {
         var _this = this;
-        this.http.get('./app/site-news.json').subscribe(function (data) { return _this.news = data.json(); });
+        this.http.get('./api/SiteNews').subscribe(function (data) { return _this.news = data.json(); });
     };
     ViewNewsComponent.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure
@@ -49,7 +49,7 @@ var ViewNewsComponent = (function () {
 ViewNewsComponent = __decorate([
     core_1.Component({
         selector: 'news-app',
-        template: "\n      <h1>{{news.title}}</h1>\n  "
+        template: "\n        <h3 class=\"mbr-section-title display-2\">{{news.title}}</h3>\n        <small>By {{news.displayAuthorName}}, posted on {{news.dateTime}} </small>\n        <div class=\"col-md-8 col-md-offset-2 lead\">{{news.news}}</div>\n  "
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], ViewNewsComponent);

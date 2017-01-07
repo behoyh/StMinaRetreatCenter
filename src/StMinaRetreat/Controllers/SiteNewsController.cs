@@ -14,16 +14,30 @@ namespace StMinaRetreat.Controllers
     public class SiteNewsController : Controller
     {
 
+        [HttpGet]
+        public SiteNews Get()
+        {
+            var sitenews = System.IO.File.ReadAllText("wwwroot/app/site-news.json");
+
+            var news = JsonConvert.DeserializeObject<SiteNews>(sitenews);
+
+            return news;
+        }
+
 
         // POST: api/SiteNews
         [HttpPost]
         public bool Post([FromBody]SiteNews request)
         {
 
-            if (!request.Password.Equals("StMina2017"))
+            if (string.IsNullOrEmpty(request.Password) ||!request.Password.Equals("StMina2017"))
             {
                 return false;
             }
+
+            request.Password = null;
+
+            request.DateTime = DateTime.Now.ToString("MM/dd/yyyy");
 
             System.IO.File.Delete("wwwroot/app/site-news.json");
             System.IO.File.WriteAllText("wwwroot/app/site-news.json", JsonConvert.SerializeObject(request).ToString());

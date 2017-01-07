@@ -8,12 +8,14 @@
     OnDestroy,
     OnInit,
     SimpleChanges,
+    Directive,
     Component
 } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions, ResponseContentType, ConnectionBackend } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { FormsModule } from '@angular/forms';
 
 export class News {
     title: string;
@@ -23,10 +25,7 @@ var NEWS: News = { title: "" };
 
 @Component({
     selector: 'write-news',
-    template: `
-      <input type="text" value="{{news.title}}">
-<button (click)="setNews()">Submit</button>
-  `
+    templateUrl: 'app2/templates/write-news.html'
 })
 
 export class WriteNewsComponent implements OnInit {
@@ -37,7 +36,7 @@ export class WriteNewsComponent implements OnInit {
     news = NEWS;
 
     getNews() {
-        this.http.get('./app/site-news.json').subscribe(data => this.news = data.json() as News);
+        this.http.get('./api/SiteNews').subscribe(data => this.news = data.json() as News);
     }
 
     setNews() {

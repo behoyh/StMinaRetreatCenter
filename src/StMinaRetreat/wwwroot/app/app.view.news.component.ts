@@ -26,7 +26,9 @@ var NEWS: News = { title: "" };
 @Component({
     selector: 'news-app',
     template: `
-      <h1>{{news.title}}</h1>
+        <h3 class="mbr-section-title display-2">{{news.title}}</h3>
+        <small>By {{news.displayAuthorName}}, posted on {{news.dateTime}} </small>
+        <div class="col-md-8 col-md-offset-2 lead">{{news.news}}</div>
   `
 })
 
@@ -38,7 +40,7 @@ export class ViewNewsComponent implements OnInit {
     news = NEWS;
 
     getNews() {
-        this.http.get('./app/site-news.json').subscribe(data => this.news = data.json() as News);
+        this.http.get('./api/SiteNews').subscribe(data => this.news = data.json() as News);
     }
 
 

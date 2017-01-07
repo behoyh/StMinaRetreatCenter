@@ -27,7 +27,7 @@ var WriteNewsComponent = (function () {
     WriteNewsComponent.prototype.ngOnInit = function () { this.getNews(); };
     WriteNewsComponent.prototype.getNews = function () {
         var _this = this;
-        this.http.get('./app/site-news.json').subscribe(function (data) { return _this.news = data.json(); });
+        this.http.get('./api/SiteNews').subscribe(function (data) { return _this.news = data.json(); });
     };
     WriteNewsComponent.prototype.setNews = function () {
         var _this = this;
@@ -52,7 +52,7 @@ var WriteNewsComponent = (function () {
 WriteNewsComponent = __decorate([
     core_1.Component({
         selector: 'write-news',
-        template: "\n      <input type=\"text\" value=\"{{news.title}}\">\n<button (click)=\"setNews()\">Submit</button>\n  "
+        templateUrl: 'app2/templates/write-news.html'
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], WriteNewsComponent);

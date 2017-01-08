@@ -49,7 +49,7 @@ var ViewNewsComponent = (function () {
 ViewNewsComponent = __decorate([
     core_1.Component({
         selector: 'news-app',
-        template: "\n        <h3 class=\"mbr-section-title display-2\">{{news.title}}</h3>\n        <small>By {{news.displayAuthorName}}, posted on {{news.dateTime}} </small>\n        <div class=\"col-md-8 col-md-offset-2 lead\" [innerHTML]=\"news.news\"></div>\n  "
+        templateUrl: 'app/templates/view-news.html'
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], ViewNewsComponent);

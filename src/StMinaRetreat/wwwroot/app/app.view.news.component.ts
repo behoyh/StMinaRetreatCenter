@@ -25,11 +25,7 @@ var NEWS: News = { title: "" };
 
 @Component({
     selector: 'news-app',
-    template: `
-        <h3 class="mbr-section-title display-2">{{news.title}}</h3>
-        <small>By {{news.displayAuthorName}}, posted on {{news.dateTime}} </small>
-        <div class="col-md-8 col-md-offset-2 lead" [innerHTML]="news.news"></div>
-  `
+    templateUrl: 'app/templates/view-news.html'
 })
 
 export class ViewNewsComponent implements OnInit {

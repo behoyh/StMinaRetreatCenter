@@ -13,7 +13,6 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_write_news_component_1 = require("./app.write.news.component");
-var tiny_directive_1 = require("./directives/tiny.directive");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,7 +22,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
-        declarations: [app_write_news_component_1.WriteNewsComponent, tiny_directive_1.TinyEditor],
+        declarations: [app_write_news_component_1.WriteNewsComponent],
         bootstrap: [app_write_news_component_1.WriteNewsComponent]
     }),
     __metadata("design:paramtypes", [])

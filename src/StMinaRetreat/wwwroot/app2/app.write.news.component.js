@@ -18,11 +18,12 @@ var News = (function () {
     return News;
 }());
 exports.News = News;
-var NEWS = { title: "" };
+var NEWS = { title: "", news: "" };
 var WriteNewsComponent = (function () {
     function WriteNewsComponent(http) {
         this.http = http;
         this.news = NEWS;
+        this.onEditorKeyup = new core_1.EventEmitter();
     }
     WriteNewsComponent.prototype.ngOnInit = function () { this.getNews(); };
     WriteNewsComponent.prototype.getNews = function () {
@@ -31,6 +32,7 @@ var WriteNewsComponent = (function () {
     };
     WriteNewsComponent.prototype.setNews = function () {
         var _this = this;
+        debugger;
         this.http.post('./api/SiteNews', this.news).subscribe(function (res) { return _this.getNews(); });
     };
     WriteNewsComponent.prototype.handleError = function (error) {
@@ -47,8 +49,34 @@ var WriteNewsComponent = (function () {
         console.error(errMsg);
         return Rx_1.Observable.throw(errMsg);
     };
+    WriteNewsComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            setup: function (editor) {
+                debugger;
+                _this.editor = editor;
+                editor.on('keyup', function () {
+                    var content = editor.getContent();
+                    _this.news.news = content;
+                });
+            },
+        });
+    };
+    WriteNewsComponent.prototype.ngOnDestroy = function () {
+        tinymce.remove(this.editor);
+    };
     return WriteNewsComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], WriteNewsComponent.prototype, "onEditorKeyup", void 0);
 WriteNewsComponent = __decorate([
     core_1.Component({
         selector: 'write-news',

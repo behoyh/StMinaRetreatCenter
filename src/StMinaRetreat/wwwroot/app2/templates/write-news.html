@@ -11,7 +11,7 @@
         <label>
             Content
         </label>
-        <textarea [(ngModel)]="news.news" [htmlEditor]></textarea>
+        <textarea (onEditorKeyup)="keyupHandlerFunction($event)" [(ngModel)]="news.news" ></textarea>
     </div>
 </div>
 <div class="row">

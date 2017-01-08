@@ -9,7 +9,10 @@
     OnInit,
     SimpleChanges,
     Directive,
-    Component
+    Component,
+    Input,
+    Output,
+    EventEmitter
 } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions, ResponseContentType, ConnectionBackend } from '@angular/http';
@@ -19,9 +22,12 @@ import { FormsModule } from '@angular/forms';
 
 export class News {
     title: string;
+    news: string;
 }
 
-var NEWS: News = { title: "" };
+var NEWS: News = { title: "", news:"" };
+
+declare var tinymce: any;
 
 @Component({
     selector: 'write-news',
@@ -40,6 +46,7 @@ export class WriteNewsComponent implements OnInit {
     }
 
     setNews() {
+        debugger;
         this.http.post('./api/SiteNews', this.news).subscribe(res => this.getNews());
     }
 
@@ -56,5 +63,33 @@ export class WriteNewsComponent implements OnInit {
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
+
+    @Output() onEditorKeyup = new EventEmitter<any>();
+
+    editor: any;
+
+    ngAfterViewInit() {
+        tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            setup: (editor: any) => {
+                debugger;
+                this.editor = editor;
+                editor.on('keyup', () => {
+                    const content = editor.getContent();
+                    this.news.news = content;
+                });
+            },
+        });
+    }
+
+    ngOnDestroy() {
+        tinymce.remove(this.editor);
+    }
+
 }
 

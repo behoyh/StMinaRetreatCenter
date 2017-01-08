@@ -9,7 +9,8 @@ import { ViewNewsComponent } from './app.view.news.component';
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule],
     bootstrap: [AppComponent, ViewNewsComponent],
-    providers: [NewsletterService]
+    providers: [NewsletterService],
+    declarations: [AppComponent, ViewNewsComponent]
 })
 export class AppModule {
 

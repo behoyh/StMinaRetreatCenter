@@ -15,9 +15,9 @@ namespace StMinaRetreat.Controllers
         {
             List<NewsletterPath> paths = new List<NewsletterPath>();
 
-            foreach (var path in Directory.GetDirectories("wwwroot/Newsletters"))
+            foreach (var path in Directory.GetDirectories("Newsletters"))
             {
-                paths.Add(new NewsletterPath { path = path });
+                paths.Add(new NewsletterPath { path = path, name = $"{path.Split('\\').LastOrDefault()}" });
             }
 
             return paths;
@@ -28,9 +28,9 @@ namespace StMinaRetreat.Controllers
         {
             List<NewsletterPath> paths = new List<NewsletterPath>();
 
-            foreach (var path in Directory.GetFiles($"wwwroot/Newsletters/{volume}"))
+            foreach (var path in Directory.GetFiles($"Newsletters/{volume}"))
             {
-                paths.Add(new NewsletterPath { path = path });
+                paths.Add(new NewsletterPath { path = path, name=$"{volume}&nbsp;&nbsp;&nbsp; <i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i> &nbsp;&nbsp;&nbsp; {path.Split('\\').LastOrDefault()}" });
             }
 
             return paths;
@@ -41,39 +41,17 @@ namespace StMinaRetreat.Controllers
         {
 
             HttpContext.Response.ContentType = "application/pdf";
-            FileContentResult result = new FileContentResult(System.IO.File.ReadAllBytes($"wwwroot/Newsletters/{volume}/{quarter}"), "application/pdf")
+            FileContentResult result = new FileContentResult(System.IO.File.ReadAllBytes($"Newsletters/{volume}/{quarter}"), "application/pdf")
             {
                 FileDownloadName = $"{quarter}.pdf"
             };
-
-
-
             return result;
-        }
-
-
-        // POST: api/Articles
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-
-        }
-
-        // PUT: api/Articles/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 
     public class NewsletterPath
     {
         public string path { get; set; }
+        public string name { get; set; }
     }
 }

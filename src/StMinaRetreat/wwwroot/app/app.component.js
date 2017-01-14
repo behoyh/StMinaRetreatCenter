@@ -18,7 +18,7 @@ var FilePath = (function () {
     return FilePath;
 }());
 exports.FilePath = FilePath;
-var PATHS = [];
+var PATHS = [{ path: "", name: "" }];
 var AppComponent = (function () {
     function AppComponent(newsletterService) {
         this.newsletterService = newsletterService;
@@ -31,16 +31,19 @@ var AppComponent = (function () {
         var _this = this;
         this.newsletterService.getNewsletterDirectories()
             .subscribe(function (path) { return _this.paths = path; }, function (error) { return _this.errorMessage = error; });
+        this.selectedPath = false;
     };
     AppComponent.prototype.getNewsletters = function (path) {
         var _this = this;
         this.newsletterService.getNewsletters(path.path)
             .subscribe(function (path) { return _this.paths = path; }, function (error) { return _this.errorMessage = error; });
+        this.selectedPath = true;
     };
     AppComponent.prototype.getNewsletter = function (path, id) {
         var _this = this;
         this.newsletterService.getNewsLetter(path.path)
             .subscribe(function (data) { return _this.downloadFile(data, id); }, function (error) { return _this.errorMessage = error; });
+        this.selectedPath = true;
     };
     AppComponent.prototype.downloadFile = function (data, id) {
         var blob = new Blob([data], { type: 'application/pdf' });
@@ -51,17 +54,17 @@ var AppComponent = (function () {
         else {
             window.open(url, "_blank");
         }
+        this.selectedPath = true;
     };
     AppComponent.prototype.onSelect = function (path) {
         var trunPath = new FilePath();
-        this.selectedPath = path;
-        var firstLevel = path.path.indexOf('wwwroot/Newsletters\\') !== -1;
+        var firstLevel = path.path.indexOf('Newsletters\\') !== -1;
         if (firstLevel) {
             trunPath.path = path.path.split('\\').pop();
             this.getNewsletters(trunPath);
         }
         else {
-            trunPath.path = path.path.replace('wwwroot/Newsletters/', '').replace('\\', '/');
+            trunPath.path = path.path.replace('Newsletters/', '').replace('\\', '/');
             this.getNewsletter(trunPath, path.path);
         }
     };
@@ -70,7 +73,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n    <div *ngIf=\"selectedPath\">\n      <h2>{{selectedPath.path}}</h2>\n    </div>\n    <ul class=\"list-group list-group-flush\">\n      <li *ngFor=\"let path of paths\" class=\"list-group-item\" (click)=\"onSelect(path)\">\n        <a id={{path.path}} download=\"Newsletter.pdf\" class=\"badge\">{{path.path}}</a>\n      </li>\n    </ul>\n  "
+        templateUrl: 'app/templates/view-newsletters.html'
     }),
     __metadata("design:paramtypes", [NewsletterService_1.NewsletterService])
 ], AppComponent);

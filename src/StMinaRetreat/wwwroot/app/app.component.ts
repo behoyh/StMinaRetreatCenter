@@ -20,28 +20,20 @@ import { NewsletterService } from './NewsletterService'
 
 export class FilePath {
     path: string;
+    name: string;
 }
 
-var PATHS: FilePath[] = [];
+var PATHS: FilePath[] = [{ path: "", name: "" }];
 
 @Component({
     selector: 'my-app',
-    template: `
-    <div *ngIf="selectedPath">
-      <h2>{{selectedPath.path}}</h2>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li *ngFor="let path of paths" class="list-group-item" (click)="onSelect(path)">
-        <a id={{path.path}} download="Newsletter.pdf" class="badge">{{path.path}}</a>
-      </li>
-    </ul>
-  `
+    templateUrl: 'app/templates/view-newsletters.html'
 })
 
 export class AppComponent implements OnInit {
 
     title = 'Directory';
-    selectedPath: FilePath;
+    selectedPath: boolean;
 
     paths = PATHS;
 
@@ -58,6 +50,7 @@ export class AppComponent implements OnInit {
             .subscribe(
             path => this.paths = path,
             error => this.errorMessage = <any>error);
+        this.selectedPath = false;
     }
 
     getNewsletters(path: FilePath) {
@@ -65,12 +58,14 @@ export class AppComponent implements OnInit {
             .subscribe(
             path => this.paths = path,
             error => this.errorMessage = <any>error);
+        this.selectedPath = true;
     }
 
     getNewsletter(path: FilePath, id: string) {
         this.newsletterService.getNewsLetter(path.path)
             .subscribe(data => this.downloadFile(data, id),
             error => this.errorMessage = <any>error);
+        this.selectedPath = true;
 
     }
 
@@ -81,25 +76,24 @@ export class AppComponent implements OnInit {
         if (window.navigator.msSaveBlob) {
             window.navigator.msSaveBlob(blob, 'Newsletter.pdf');
         }
+
         else {
             window.open(url, "_blank");
         }
+        this.selectedPath = true;
     }
 
     onSelect(path: FilePath): void {
         var trunPath = new FilePath();
 
-
-        this.selectedPath = path;
-
-        var firstLevel = path.path.indexOf('wwwroot/Newsletters\\') !== -1;
+        var firstLevel = path.path.indexOf('Newsletters\\') !== -1;
 
         if (firstLevel) {
             trunPath.path = path.path.split('\\').pop();
             this.getNewsletters(trunPath);
         }
         else {
-            trunPath.path = path.path.replace('wwwroot/Newsletters/', '').replace('\\', '/');
+            trunPath.path = path.path.replace('Newsletters/', '').replace('\\', '/');
             this.getNewsletter(trunPath, path.path);
         }
     }

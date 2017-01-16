@@ -53,15 +53,40 @@ var WriteNewsComponent = (function () {
         var _this = this;
         tinymce.init({
             selector: 'textarea',
+            toolbar: 'undo redo | link image media',
+            file_picker_types: 'image',
+            paste_data_images: true,
+            relative_urls: false,
+            convert_urls: false,
+            remove_script_host: false,
+            images_upload_handler: function (blob, success, failure) {
+                tinymce.activeEditor.execCommand("mceInsertContent", false, "<img src='" + blob + "'");
+            },
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                input.onchange = function () {
+                    var file = input.files[0];
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (e) {
+                            cb(reader.result);
+                        };
+                    }
+                };
+                input.click();
+            },
             plugins: [
                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "save table contextmenu directionality emoticons template paste textcolor"
+                "save table contextmenu directionality emoticons template paste textcolor imagetools"
             ],
             setup: function (editor) {
                 debugger;
                 _this.editor = editor;
-                editor.on('keyup', function () {
+                editor.on('change', function () {
                     var content = editor.getContent();
                     _this.news.news = content;
                 });

@@ -15,7 +15,7 @@ namespace StMinaRetreat.Controllers
         {
             List<NewsletterPath> paths = new List<NewsletterPath>();
 
-            foreach (var path in Directory.GetDirectories("Newsletters"))
+            foreach (var path in Directory.GetDirectories("./Newsletters"))
             {
                 paths.Add(new NewsletterPath { path = path, name = $"{path.Split('\\').LastOrDefault()}" });
             }
@@ -28,7 +28,7 @@ namespace StMinaRetreat.Controllers
         {
             List<NewsletterPath> paths = new List<NewsletterPath>();
 
-            foreach (var path in Directory.GetFiles($"Newsletters/{volume}"))
+            foreach (var path in Directory.GetFiles($"./Newsletters/{volume}"))
             {
                 paths.Add(new NewsletterPath { path = path, name=$"{volume}&nbsp;&nbsp;&nbsp; <i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i> &nbsp;&nbsp;&nbsp; {path.Split('\\').LastOrDefault()}" });
             }
@@ -41,7 +41,7 @@ namespace StMinaRetreat.Controllers
         {
 
             HttpContext.Response.ContentType = "application/pdf";
-            FileContentResult result = new FileContentResult(System.IO.File.ReadAllBytes($"Newsletters/{volume}/{quarter}"), "application/pdf")
+            FileContentResult result = new FileContentResult(System.IO.File.ReadAllBytes($"./Newsletters/{volume}/{quarter}"), "application/pdf")
             {
                 FileDownloadName = $"{quarter}.pdf"
             };

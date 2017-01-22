@@ -30,7 +30,7 @@ namespace StMinaRetreat.Controllers
 
             foreach (var path in Directory.GetFiles($"./Newsletters/{volume}"))
             {
-                paths.Add(new NewsletterPath { path = path, name=$"{volume}&nbsp;&nbsp;&nbsp; <i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i> &nbsp;&nbsp;&nbsp; {path.Split('\\').LastOrDefault()}" });
+                paths.Add(new NewsletterPath { path = path, name = $"{volume}&nbsp;&nbsp;&nbsp; <i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i> &nbsp;&nbsp;&nbsp; {path.Split('\\').LastOrDefault()}" });
             }
 
             return paths;
@@ -47,11 +47,42 @@ namespace StMinaRetreat.Controllers
             };
             return result;
         }
+
+
+        [HttpPost("{volume}/{quarter}")]
+        public bool PostNewsletter(PostNewsletter request)
+        {
+            if (request.password != "StMina2017")
+            {
+                return false;
+            }
+
+            if (!Directory.Exists($"./Newsletters/{request.volume}"))
+            {
+                Directory.CreateDirectory($"./Newsletters/{request.volume}");
+            }
+
+            FileStream stream = new FileStream($"./Newsletters/{request.volume}", FileMode.Create, FileAccess.Write);
+            stream.Write(request.data, 0, request.data.Length);
+
+            stream.Dispose();
+
+
+
+            return true;
+        }
     }
 
     public class NewsletterPath
     {
         public string path { get; set; }
         public string name { get; set; }
+    }
+
+    public class PostNewsletter
+    {
+        public string volume;
+        public byte[] data;
+        public string password;
     }
 }

@@ -25,6 +25,8 @@ export class FilePath {
 
 var PATHS: FilePath[] = [{ path: "", name: "" }];
 
+var NEWEST: FilePath = { path: "", name: "" };
+
 @Component({
     selector: 'my-app',
     templateUrl: 'app/templates/view-newsletters.html'
@@ -35,6 +37,8 @@ export class AppComponent implements OnInit {
     title = 'Directory';
     selectedPath: boolean;
 
+    newest = NEWEST;
+
     paths = PATHS;
 
     errorMessage: string;
@@ -43,7 +47,16 @@ export class AppComponent implements OnInit {
 
     constructor(private newsletterService: NewsletterService) { }
 
-    ngOnInit() { this.getNewsletterDirectories(); }
+    ngOnInit() {
+
+        this.getNewsletterDirectories();
+
+        this.newsletterService.getNewsletterDirectories()
+            .subscribe(
+            path => this.newestSearch(path),
+            error => this.errorMessage = <any>error);
+
+    }
 
     getNewsletterDirectories() {
         this.newsletterService.getNewsletterDirectories()
@@ -98,6 +111,18 @@ export class AppComponent implements OnInit {
         }
     }
 
+    newestSearch(path: FilePath[])
+    {
+        var trunPath = new FilePath();
+
+        var newest = path.pop();
+        trunPath.path = newest.path.split('\\').pop();
+        debugger;
+        this.newsletterService.getNewsletters(trunPath.path)
+            .subscribe(
+            path => this.newest = path.pop(),
+            error => this.errorMessage = <any>error);
+    }
 
 }
 

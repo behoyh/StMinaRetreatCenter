@@ -19,14 +19,21 @@ var FilePath = (function () {
 }());
 exports.FilePath = FilePath;
 var PATHS = [{ path: "", name: "" }];
+var NEWEST = { path: "", name: "" };
 var AppComponent = (function () {
     function AppComponent(newsletterService) {
         this.newsletterService = newsletterService;
         this.title = 'Directory';
+        this.newest = NEWEST;
         this.paths = PATHS;
         this.mode = 'Observable';
     }
-    AppComponent.prototype.ngOnInit = function () { this.getNewsletterDirectories(); };
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getNewsletterDirectories();
+        this.newsletterService.getNewsletterDirectories()
+            .subscribe(function (path) { return _this.newestSearch(path); }, function (error) { return _this.errorMessage = error; });
+    };
     AppComponent.prototype.getNewsletterDirectories = function () {
         var _this = this;
         this.newsletterService.getNewsletterDirectories()
@@ -67,6 +74,15 @@ var AppComponent = (function () {
             trunPath.path = path.path.replace('Newsletters/', '').replace('\\', '/');
             this.getNewsletter(trunPath, path.path);
         }
+    };
+    AppComponent.prototype.newestSearch = function (path) {
+        var _this = this;
+        var trunPath = new FilePath();
+        var newest = path.pop();
+        trunPath.path = newest.path.split('\\').pop();
+        debugger;
+        this.newsletterService.getNewsletters(trunPath.path)
+            .subscribe(function (path) { return _this.newest = path.pop(); }, function (error) { return _this.errorMessage = error; });
     };
     return AppComponent;
 }());

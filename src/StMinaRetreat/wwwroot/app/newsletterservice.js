@@ -8,36 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var http_2 = require("@angular/http");
-var Rx_1 = require("rxjs/Rx");
+var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
-var NewsletterService = (function () {
+var NewsletterService = /** @class */ (function () {
     function NewsletterService(http) {
         this.http = http;
     }
-    NewsletterService.prototype.getNewsletterDirectories = function () {
-        return this.http.get('api/Newsletters')
-            .map(function (r) { return r.json(); })
-            .catch(this.handleError);
-    };
-    NewsletterService.prototype.getNewsletters = function (path) {
-        return this.http.get('api/Newsletters/' + path)
-            .map(function (r) { return r.json(); })
-            .catch(this.handleError);
-    };
-    NewsletterService.prototype.getNewsLetter = function (path) {
-        var options = new http_2.RequestOptions({
-            headers: new http_2.Headers({ 'Content-Type': 'application/pdf' }),
-            responseType: http_2.ResponseContentType.Blob
-        });
-        return this.http.get('api/Newsletters/' + path, options)
-            .map(function (response) { return response.blob(); })
-            .catch(this.handleError);
-    };
     NewsletterService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
         var errMsg;
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
@@ -48,13 +28,13 @@ var NewsletterService = (function () {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Rx_1.Observable.throw(errMsg);
+        return Observable_1.Observable.throw(errMsg);
     };
+    NewsletterService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], NewsletterService);
     return NewsletterService;
 }());
-NewsletterService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], NewsletterService);
 exports.NewsletterService = NewsletterService;
 //# sourceMappingURL=newsletterservice.js.map

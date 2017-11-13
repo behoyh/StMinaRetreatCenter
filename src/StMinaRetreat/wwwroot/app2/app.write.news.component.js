@@ -8,18 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var Rx_1 = require("rxjs/Rx");
+var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
-var News = (function () {
+var News = /** @class */ (function () {
     function News() {
     }
     return News;
 }());
 exports.News = News;
 var NEWS = { title: "", news: "" };
-var WriteNewsComponent = (function () {
+var WriteNewsComponent = /** @class */ (function () {
     function WriteNewsComponent(http) {
         this.http = http;
         this.news = NEWS;
@@ -47,7 +48,7 @@ var WriteNewsComponent = (function () {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Rx_1.Observable.throw(errMsg);
+        return Observable_1.Observable.throw(errMsg);
     };
     WriteNewsComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -96,18 +97,18 @@ var WriteNewsComponent = (function () {
     WriteNewsComponent.prototype.ngOnDestroy = function () {
         tinymce.remove(this.editor);
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], WriteNewsComponent.prototype, "onEditorKeyup", void 0);
+    WriteNewsComponent = __decorate([
+        core_1.Component({
+            selector: 'write-news',
+            templateUrl: 'app2/templates/write-news.html'
+        }),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], WriteNewsComponent);
     return WriteNewsComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], WriteNewsComponent.prototype, "onEditorKeyup", void 0);
-WriteNewsComponent = __decorate([
-    core_1.Component({
-        selector: 'write-news',
-        templateUrl: 'app2/templates/write-news.html'
-    }),
-    __metadata("design:paramtypes", [http_1.Http])
-], WriteNewsComponent);
 exports.WriteNewsComponent = WriteNewsComponent;
 //# sourceMappingURL=app.write.news.component.js.map

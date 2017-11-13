@@ -1,0 +1,36 @@
+<div *ngFor="let activeAlert of activeAlerts"
+     [ngClass]="{'alert':true, 'alert-primary': activeAlert.type === 'primary', 'alert-default': activeAlert.type === 'default', 'alert-success': activeAlert.type === 'success', 'alert-danger': activeAlert.type === 'danger'}"
+     [innerHTML]="activeAlert.subject" role="alert">
+</div>
+<br />
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-lg-6">
+                <small class="text-uppercase font-weight-bold text-muted"> Name </small>
+            </div>
+            <div class="col-lg-2">
+                <small class="text-uppercase font-weight-bold text-muted"> Type </small>
+            </div>
+            <div class="col-lg-3">
+                <small class="text-uppercase font-weight-bold text-muted"> Date </small>
+            </div>
+            <div class="col-lg-1">
+
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item" *ngFor="let inActiveAlert of inActiveAlerts">
+        <div class="row">
+            <div class="col-lg-6" [innerHTML]="inActiveAlert.subject">
+            </div>
+            <div class="col-lg-2" [innerHTML]="inActiveAlert.type">
+            </div>
+            <div class="col-lg-3" [innerHTML]="inActiveAlert.startTime + ' - ' + inActiveAlert.endTime">
+            </div>
+            <div class="col-lg-1">
+            </div>
+        </div>
+    </li>
+</ul>
+

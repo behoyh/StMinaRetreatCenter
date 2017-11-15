@@ -1,8 +1,6 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/src/StMinaRetreat/node_modules
+﻿/src/StMinaRetreat/node_modules
 /src/StMinaRetreat/bin
 /src/StMinaRetreat/obj
 /.vs/Credo.Endpoints.Marketing/v15
+*.js
+*.map

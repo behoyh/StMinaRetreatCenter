@@ -1,0 +1,13 @@
+﻿import { Component } from "@angular/core";
+
+@Component({
+    selector: 'banner',
+    templateUrl: './app2/components/templates/banner.html',
+    host: {
+        class: 'col-lg-10'
+    }
+})
+
+export class BannerMessagesComponent {
+
+}

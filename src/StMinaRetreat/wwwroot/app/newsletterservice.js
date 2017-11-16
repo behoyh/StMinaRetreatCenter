@@ -9,32 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var Observable_1 = require("rxjs/Observable");
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
+const Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
-var NewsletterService = /** @class */ (function () {
-    function NewsletterService(http) {
+let NewsletterService = class NewsletterService {
+    constructor(http) {
         this.http = http;
     }
-    NewsletterService.prototype.handleError = function (error) {
-        var errMsg;
+    handleError(error) {
+        let errMsg;
         if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
         }
         else {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
         return Observable_1.Observable.throw(errMsg);
-    };
-    NewsletterService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
-    ], NewsletterService);
-    return NewsletterService;
-}());
+    }
+};
+NewsletterService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], NewsletterService);
 exports.NewsletterService = NewsletterService;
 //# sourceMappingURL=newsletterservice.js.map

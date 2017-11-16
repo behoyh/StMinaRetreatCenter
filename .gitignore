@@ -4,3 +4,5 @@
 /.vs/Credo.Endpoints.Marketing/v15
 *.js
 *.map
+/src/StMinaRetreat/wwwroot/node_modules
+/src/StMinaRetreat/wwwroot/package-lock.json

@@ -6,25 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var forms_1 = require("@angular/forms");
-var http_1 = require("@angular/http");
-var app_component_1 = require("./app.component");
-var NewsletterService_1 = require("./NewsletterService");
-var AppModule = /** @class */ (function () {
-    function AppModule() {
-    }
-    AppModule.prototype.ngOnInit = function () { core_1.enableProdMode(); };
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
-            bootstrap: [app_component_1.AppComponent],
-            providers: [NewsletterService_1.NewsletterService],
-            declarations: [app_component_1.AppComponent]
-        })
-    ], AppModule);
-    return AppModule;
-}());
+const core_1 = require("@angular/core");
+const platform_browser_1 = require("@angular/platform-browser");
+const forms_1 = require("@angular/forms");
+const http_1 = require("@angular/http");
+const app_component_1 = require("./app.component");
+const NewsletterService_1 = require("./NewsletterService");
+let AppModule = class AppModule {
+    ngOnInit() { core_1.enableProdMode(); }
+};
+AppModule = __decorate([
+    core_1.NgModule({
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
+        bootstrap: [app_component_1.AppComponent],
+        providers: [NewsletterService_1.NewsletterService],
+        declarations: [app_component_1.AppComponent]
+    })
+], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

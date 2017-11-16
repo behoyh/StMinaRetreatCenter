@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using StMinaRetreat.Data;
-using StMinaRetreat.Models;
 using StMinaRetreat.Services;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
@@ -30,7 +28,7 @@ namespace StMinaRetreat
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+                //builder.AddUserSecrets();
 
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
@@ -48,9 +46,9 @@ namespace StMinaRetreat
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+           // services.AddIdentity<ApplicationUser, IdentityRole>()
+                //.AddEntityFrameworkStores<ApplicationDbContext>()
+                //.AddDefaultTokenProviders();
 
             services.AddMvc();
 

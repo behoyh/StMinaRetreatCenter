@@ -2,7 +2,7 @@
 
 @Component({
     selector: 'default',
-    templateUrl: './app2/components/templates/default.html',
+    templateUrl: './app2/components/templates/default-template.html',
     host: {
         class: 'col-lg-10'
     }

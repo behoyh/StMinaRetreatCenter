@@ -2,7 +2,7 @@
 
 @Component({
     selector: 'banner',
-    templateUrl: './app2/components/templates/banner.html',
+    templateUrl: './app2/components/templates/banner-template.html',
     host: {
         class: 'col-lg-10'
     }

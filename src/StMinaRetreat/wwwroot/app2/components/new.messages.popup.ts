@@ -2,7 +2,7 @@
 
 @Component({
     selector: 'banner',
-    templateUrl: './app2/components/templates/popup.html',
+    templateUrl: './app2/components/templates/popup-template.html',
     host: {
         class: 'col-lg-10'
     }

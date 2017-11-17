@@ -33,7 +33,7 @@ var NEWS: News = { title: "", news: "" };
 })
 
 export class WriteMessagesComponent implements OnInit {
-    ngOnInit() { this.getNews(); }
+    ngOnInit() { }
 
     constructor(private http: Http) { }
 

@@ -1,0 +1,41 @@
+﻿
+
+<div class="row">
+    <div class="col-lg-12">
+        <label>Title</label>
+        <input class="form-control" type="text" [(ngModel)]="news.title">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <label>
+            Content
+        </label>
+        <textarea (onEditorKeyup)="keyupHandlerFunction($event)" [(ngModel)]="news.news" ></textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <label>Username</label>
+        <input class="form-control" type="text" [(ngModel)]="news.displayAuthorName">
+    </div>
+
+    <div class="col-lg-6">
+        <label>Password</label>
+        <input class="form-control" type="text" [(ngModel)]="news.password">
+    </div>
+</div>
+<div class="row">
+    &nbsp;
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button class="btn btn-default" (click)="setNews()">Submit</button>
+        </div>
+    </div>
+
+
+
+
+
+

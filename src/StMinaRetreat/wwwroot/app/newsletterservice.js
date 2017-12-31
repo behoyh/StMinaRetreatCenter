@@ -11,13 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/http");
-const Observable_1 = require("rxjs/Observable");
+const http_2 = require("@angular/http");
+const Rx_1 = require("rxjs/Rx");
 require("rxjs/add/operator/map");
 let NewsletterService = class NewsletterService {
     constructor(http) {
         this.http = http;
     }
+    getNewsletterDirectories() {
+        return this.http.get('api/Newsletters')
+            .map((r) => r.json())
+            .catch(this.handleError);
+    }
+    getNewsletters(path) {
+        return this.http.get('api/Newsletters/' + path)
+            .map((r) => r.json())
+            .catch(this.handleError);
+    }
+    getNewsLetter(path) {
+        var options = new http_2.RequestOptions({
+            headers: new http_2.Headers({ 'Content-Type': 'application/pdf' }),
+            responseType: http_2.ResponseContentType.Blob
+        });
+        return this.http.get('api/Newsletters/' + path, options)
+            .map((response) => response.blob())
+            .catch(this.handleError);
+    }
     handleError(error) {
+        // In a real world app, we might use a remote logging infrastructure
         let errMsg;
         if (error instanceof http_1.Response) {
             const body = error.json() || '';
@@ -28,7 +49,7 @@ let NewsletterService = class NewsletterService {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Observable_1.Observable.throw(errMsg);
+        return Rx_1.Observable.throw(errMsg);
     }
 };
 NewsletterService = __decorate([

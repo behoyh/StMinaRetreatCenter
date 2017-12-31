@@ -12,15 +12,17 @@ const forms_1 = require("@angular/forms");
 const http_1 = require("@angular/http");
 const app_component_1 = require("./app.component");
 const NewsletterService_1 = require("./NewsletterService");
+const app_view_news_component_1 = require("./app.view.news.component");
+const app_component_2 = require("./app.component");
 let AppModule = class AppModule {
     ngOnInit() { core_1.enableProdMode(); }
 };
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
-        bootstrap: [app_component_1.AppComponent],
+        bootstrap: [app_component_1.AppComponent, app_view_news_component_1.ViewNewsComponent],
         providers: [NewsletterService_1.NewsletterService],
-        declarations: [app_component_1.AppComponent]
+        declarations: [app_component_1.AppComponent, app_view_news_component_1.ViewNewsComponent, app_component_2.SafePipe]
     })
 ], AppModule);
 exports.AppModule = AppModule;

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <ShowAllFiles>true</ShowAllFiles>
     <ActiveDebugProfile>StMinaRetreat</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>StMinaRetreatCenter - Web Deploy %282%29</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

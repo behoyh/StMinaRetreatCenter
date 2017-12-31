@@ -1,0 +1,11 @@
+<ul class="list-group list-group-flush">
+    <li (click)="onSelect(newest)" class="list-group-item">
+        <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i> Latest!  &nbsp; &nbsp;&nbsp;
+        <a id={{newest.path}} download="Newsletter.pdf" class="badge" [innerHTML]="newest.name"></a>
+    </li>
+    <li *ngIf="selectedPath" class="list-group-item" (click)="getNewsletterDirectories()"> <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> <a> &nbsp; back </a> </li>
+    <li *ngFor="let path of paths" class="list-group-item" (click)="onSelect(path)">
+        <a id={{path.path}} download="Newsletter.pdf" class="badge" [innerHTML]="path.name"></a>
+    </li>
+</ul>
+

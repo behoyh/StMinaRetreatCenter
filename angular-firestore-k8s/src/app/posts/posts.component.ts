@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostDialogComponent } from '../forms/post-dialog/post-dialog.component';
 import { Select, Store } from '@ngxs/store';
 import { AppState } from '../shared/app.state';

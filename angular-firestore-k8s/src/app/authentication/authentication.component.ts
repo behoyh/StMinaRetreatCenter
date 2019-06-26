@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile/profile.service';
 import { Store, Select } from '@ngxs/store';
 import { SetUser } from '../shared/app.actions';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Navigate } from '@ngxs/router-plugin';
 import { FormGroup, FormControl } from '@angular/forms';
 

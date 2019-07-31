@@ -47,6 +47,7 @@ import { DonateComponent } from './donate/donate.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NavComponent } from './nav/nav.component';
 import { SaintsComponent } from './saints/saints.component';
+import { NewslettersComponent } from './newsletters/newsletters.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { SaintsComponent } from './saints/saints.component';
     DonateComponent,
     CalendarComponent,
     NavComponent,
-    SaintsComponent
+    SaintsComponent,
+    NewslettersComponent
   ],
   imports: [
     BrowserModule,

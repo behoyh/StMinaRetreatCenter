@@ -673,7 +673,6 @@ a:hover {
   background-color: #000;
   bottom: 0;
   left: 0;
-  opacity: .5;
   position: absolute;
   right: 0;
   top: 0;
@@ -1373,13 +1372,13 @@ body {
   display: none;
 }
 .cid-rquCMlb0NX .navbar {
-  background: #e6781e;
+  background: #ffffff;
   transition: none;
   min-height: 77px;
   padding: .5rem 0;
 }
 .cid-rquCMlb0NX .navbar-dropdown.bg-color.transparent.opened {
-  background: #e6781e;
+  background: #ffffff;
 }
 .cid-rquCMlb0NX a {
   font-style: normal;
@@ -1463,7 +1462,7 @@ body {
   padding-bottom: 0;
 }
 .cid-rquCMlb0NX .dropdown .dropdown-menu {
-  background: #e6781e;
+  background: #ffffff;
   display: none;
   position: absolute;
   min-width: 5rem;
@@ -1534,7 +1533,7 @@ body {
   width: 30px;
   height: 2px;
   border-right: 5px;
-  background-color: #FFFFFF;
+  background-color: #343a40!important;
 }
 .cid-rquCMlb0NX button.navbar-toggler .hamburger span:nth-child(1) {
   top: 0;
@@ -1751,7 +1750,7 @@ body {
 }
 .cid-rquCMlb0NX .nav-link:hover,
 .cid-rquCMlb0NX .dropdown-item:hover {
-  color: #ff3366 !important;
+  color: #000000 !important;
 }
 .cid-rquI0ZF9tm .modal-body .close {
   background: #1b1b1b;

@@ -12,20 +12,21 @@ import { LodgingComponent } from './lodging/lodging.component';
 import { DonateComponent } from './donate/donate.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { SaintsComponent } from './saints/saints.component';
+import { NewsComponent } from './news/news.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
-  { path: 'news', component: PostsComponent },
-  {
-    path: 'news/:id', component: PostComponent,
-    resolve: {
-      post: PostResolverService
-    }
-  },
+  { path: 'news', component: NewsComponent },
   { path: 'auth', component: AuthenticationComponent },
   {path:'', component: HomeComponent},
   {path:'about-us', component: AboutUsComponent},
   {path:'register', component: RegisterComponent},
+  {
+    path: 'register/:id', component: RegisterComponent,
+    resolve: {
+      post: PostResolverService
+    }
+  },
   {path:'lodging', component: LodgingComponent},
   {path: 'donate', component:DonateComponent},
   {path: 'calendar', component: CalendarComponent},

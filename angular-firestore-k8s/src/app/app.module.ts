@@ -86,7 +86,7 @@ import { NewsComponent } from './news/news.component';
     MatCardModule,
     MatIconModule,
     AppRouterModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
     MatTabsModule,
     MatRippleModule,
     MatStepperModule,

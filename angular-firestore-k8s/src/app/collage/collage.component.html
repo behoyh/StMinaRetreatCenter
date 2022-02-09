@@ -1,0 +1,12 @@
+<app-nav [Transparent]="false"></app-nav>
+<br>
+<br>
+<br>
+<p *ngIf="!imglist">...no pictures yet...</p>
+<div class="container-fluid m-0 p-0">
+    <div class="card-columns" style="column-gap: 0;">
+        <div class="card p-0 m-0" style="border-radius: 0;" *ngFor="let item of imglist;">
+            <img class="card-img-top" style="border-radius: 0;" [src]="transform(item)"/>
+        </div>
+    </div>
+</div>

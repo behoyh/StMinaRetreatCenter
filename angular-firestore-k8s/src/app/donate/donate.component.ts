@@ -14,5 +14,4 @@ export class DonateComponent implements OnInit {
   ngOnInit() {
     var tw = create_tithely_widget();
   }
-
 }

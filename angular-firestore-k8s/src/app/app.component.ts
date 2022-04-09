@@ -49,8 +49,4 @@ export class AppComponent {
       [new Navigate(['/donate'])]
     );
   }
-
-  private onError(error) {
-    alert(error);
-  }
 }

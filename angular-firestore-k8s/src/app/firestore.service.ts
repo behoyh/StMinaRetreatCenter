@@ -8,9 +8,8 @@ export class FirestoreService {
 
   constructor(private db: Firestore) { }
 
-  async readPictures()
+  async readPictures(key: string)
   {
-    let key = (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
     const docRef = doc(this.db, "collage", key);
     return await getDoc(docRef);
   }

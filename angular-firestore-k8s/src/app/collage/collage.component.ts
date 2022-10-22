@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as heic2any from 'heic2any';
+import { environment } from 'src/environments/environment';
 import { FirebaseStorageService } from "../firebase-storage.service";
 import { FirestoreService } from '../firestore.service';
 
@@ -19,9 +20,13 @@ export class CollageComponent implements OnInit {
    }
 
   imglist=[];
-  month = (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
-  async list(){
-    let items = await (await this.firestore.readPictures()).data();
+  key = (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
+
+  async list() {
+    if (!environment.production) {
+      this.key = this.key + "-TST"
+    }
+    let items = await (await this.firestore.readPictures(this.key)).data();
     items.data.forEach((item)=>{
       this.drive.getDownload(item).then(async (blob) => {
         if(blob.type === 'image/heic')

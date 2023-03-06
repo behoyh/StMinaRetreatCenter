@@ -6,7 +6,8 @@
 <div class="container-fluid m-0 p-0">
     <div class="card-columns" style="column-gap: 0;">
         <div class="card p-0 m-0" style="border-radius: 0;" *ngFor="let item of imglist;">
-            <img class="card-img-top" style="border-radius: 0;" [src]="transform(item)"/>
+            <p *ngIf="!prod">{{item.filename}}</p>
+            <img class="card-img-top" style="border-radius: 0;" [src]="transform(item.data)"/>
         </div>
     </div>
 </div>

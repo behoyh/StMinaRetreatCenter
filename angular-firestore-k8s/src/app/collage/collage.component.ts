@@ -19,8 +19,9 @@ export class CollageComponent implements OnInit {
     this.list();
    }
 
-  imglist=[];
+  imglist = [];
   key = (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
+  prod = environment.production
 
   async list() {
     if (!environment.production) {
@@ -33,7 +34,7 @@ export class CollageComponent implements OnInit {
         {
           blob = Object.assign(await heic2any.default({blob:blob, toType:"jpeg", quality:10000000000}));
         }
-        this.imglist.push(URL.createObjectURL(blob));
+        this.imglist.push({ "filename": item, "data": URL.createObjectURL(blob) });
       })
       .catch((error) => {
         // Handle any errors
